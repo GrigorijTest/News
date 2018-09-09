@@ -8,12 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		BB48D8202141DB020024EEB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D81F2141DB020024EEB5 /* AppDelegate.swift */; };
-		BB48D8222141DB020024EEB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8212141DB020024EEB5 /* ViewController.swift */; };
-		BB48D8252141DB020024EEB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB48D8232141DB020024EEB5 /* Main.storyboard */; };
+		BB48D8222141DB020024EEB5 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8212141DB020024EEB5 /* NewsViewController.swift */; };
 		BB48D8282141DB020024EEB5 /* TinkoffNews.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8262141DB020024EEB5 /* TinkoffNews.xcdatamodeld */; };
 		BB48D82A2141DB040024EEB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB48D8292141DB040024EEB5 /* Assets.xcassets */; };
 		BB48D82D2141DB040024EEB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB48D82B2141DB040024EEB5 /* LaunchScreen.storyboard */; };
 		BB48D8382141DB050024EEB5 /* TinkoffNewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8372141DB050024EEB5 /* TinkoffNewsTests.swift */; };
+		BB48D85021452E7C0024EEB5 /* NewsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D84F21452E7C0024EEB5 /* NewsPresenter.swift */; };
+		BB48D853214530520024EEB5 /* BaseViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D852214530520024EEB5 /* BaseViewOutput.swift */; };
+		BB48D8582145416F0024EEB5 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8572145416F0024EEB5 /* NewsModel.swift */; };
+		BB48D85A2145420A0024EEB5 /* ItemOfNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8592145420A0024EEB5 /* ItemOfNews.swift */; };
+		BB48D85E21454D9C0024EEB5 /* Setupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D85D21454D9C0024EEB5 /* Setupable.swift */; };
+		BB48D86021454DD40024EEB5 /* Delegatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D85F21454DD40024EEB5 /* Delegatable.swift */; };
+		BB48D86221454E8B0024EEB5 /* NewsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D86121454E8B0024EEB5 /* NewsRouter.swift */; };
+		BB48D86421454EC90024EEB5 /* NewsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D86321454EC90024EEB5 /* NewsInteractor.swift */; };
+		BB48D8672145620F0024EEB5 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8662145620F0024EEB5 /* NewsCell.swift */; };
+		BB48D869214563E20024EEB5 /* NewsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D868214563E20024EEB5 /* NewsAssembly.swift */; };
+		BB48D86C21456F0E0024EEB5 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D86B21456F0E0024EEB5 /* NetworkClient.swift */; };
+		BB48D86F214581C30024EEB5 /* DownloadNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D86E214581C30024EEB5 /* DownloadNewsService.swift */; };
+		BB48D871214582A10024EEB5 /* DownloadNewsServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D870214582A10024EEB5 /* DownloadNewsServiceImp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,8 +41,7 @@
 /* Begin PBXFileReference section */
 		BB48D81C2141DB020024EEB5 /* TinkoffNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB48D81F2141DB020024EEB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BB48D8212141DB020024EEB5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BB48D8242141DB020024EEB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BB48D8212141DB020024EEB5 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		BB48D8272141DB020024EEB5 /* TinkoffNews.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TinkoffNews.xcdatamodel; sourceTree = "<group>"; };
 		BB48D8292141DB040024EEB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB48D82C2141DB040024EEB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +49,19 @@
 		BB48D8332141DB050024EEB5 /* TinkoffNewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkoffNewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB48D8372141DB050024EEB5 /* TinkoffNewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffNewsTests.swift; sourceTree = "<group>"; };
 		BB48D8392141DB050024EEB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB48D84F21452E7C0024EEB5 /* NewsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPresenter.swift; sourceTree = "<group>"; };
+		BB48D852214530520024EEB5 /* BaseViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewOutput.swift; sourceTree = "<group>"; };
+		BB48D8572145416F0024EEB5 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		BB48D8592145420A0024EEB5 /* ItemOfNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemOfNews.swift; sourceTree = "<group>"; };
+		BB48D85D21454D9C0024EEB5 /* Setupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setupable.swift; sourceTree = "<group>"; };
+		BB48D85F21454DD40024EEB5 /* Delegatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegatable.swift; sourceTree = "<group>"; };
+		BB48D86121454E8B0024EEB5 /* NewsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRouter.swift; sourceTree = "<group>"; };
+		BB48D86321454EC90024EEB5 /* NewsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInteractor.swift; sourceTree = "<group>"; };
+		BB48D8662145620F0024EEB5 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		BB48D868214563E20024EEB5 /* NewsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAssembly.swift; sourceTree = "<group>"; };
+		BB48D86B21456F0E0024EEB5 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		BB48D86E214581C30024EEB5 /* DownloadNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadNewsService.swift; sourceTree = "<group>"; };
+		BB48D870214582A10024EEB5 /* DownloadNewsServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadNewsServiceImp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +103,9 @@
 		BB48D81E2141DB020024EEB5 /* TinkoffNews */ = {
 			isa = PBXGroup;
 			children = (
-				BB48D81F2141DB020024EEB5 /* AppDelegate.swift */,
-				BB48D8212141DB020024EEB5 /* ViewController.swift */,
-				BB48D8232141DB020024EEB5 /* Main.storyboard */,
-				BB48D8292141DB040024EEB5 /* Assets.xcassets */,
-				BB48D82B2141DB040024EEB5 /* LaunchScreen.storyboard */,
 				BB48D82E2141DB040024EEB5 /* Info.plist */,
+				BB48D843214522220024EEB5 /* Recources */,
+				BB48D842214522160024EEB5 /* Sources */,
 				BB48D8262141DB020024EEB5 /* TinkoffNews.xcdatamodeld */,
 			);
 			path = TinkoffNews;
@@ -97,6 +118,165 @@
 				BB48D8392141DB050024EEB5 /* Info.plist */,
 			);
 			path = TinkoffNewsTests;
+			sourceTree = "<group>";
+		};
+		BB48D842214522160024EEB5 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D845214522670024EEB5 /* Presentation */,
+				BB48D846214522740024EEB5 /* Services */,
+				BB48D847214522830024EEB5 /* Core */,
+				BB48D848214522940024EEB5 /* Common */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		BB48D843214522220024EEB5 /* Recources */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D844214522370024EEB5 /* AppDelegate */,
+				BB48D82B2141DB040024EEB5 /* LaunchScreen.storyboard */,
+				BB48D8292141DB040024EEB5 /* Assets.xcassets */,
+			);
+			path = Recources;
+			sourceTree = "<group>";
+		};
+		BB48D844214522370024EEB5 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D81F2141DB020024EEB5 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		BB48D845214522670024EEB5 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D849214523B50024EEB5 /* News */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		BB48D846214522740024EEB5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D86D214581650024EEB5 /* Network */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		BB48D847214522830024EEB5 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D86A21456EF40024EEB5 /* NetworkClient */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		BB48D848214522940024EEB5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D851214530310024EEB5 /* Protocols */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		BB48D849214523B50024EEB5 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D84D214523D60024EEB5 /* Wireframe */,
+				BB48D854214530CE0024EEB5 /* Entities */,
+				BB48D84C214523CE0024EEB5 /* Interactor */,
+				BB48D84B214523C80024EEB5 /* Presenter */,
+				BB48D84A214523BD0024EEB5 /* View */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		BB48D84A214523BD0024EEB5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D865214561DE0024EEB5 /* Cells */,
+				BB48D8212141DB020024EEB5 /* NewsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BB48D84B214523C80024EEB5 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D8722145AD060024EEB5 /* DataProvider */,
+				BB48D84F21452E7C0024EEB5 /* NewsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		BB48D84C214523CE0024EEB5 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D86321454EC90024EEB5 /* NewsInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		BB48D84D214523D60024EEB5 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D86121454E8B0024EEB5 /* NewsRouter.swift */,
+				BB48D868214563E20024EEB5 /* NewsAssembly.swift */,
+			);
+			path = Wireframe;
+			sourceTree = "<group>";
+		};
+		BB48D851214530310024EEB5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D852214530520024EEB5 /* BaseViewOutput.swift */,
+				BB48D85D21454D9C0024EEB5 /* Setupable.swift */,
+				BB48D85F21454DD40024EEB5 /* Delegatable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		BB48D854214530CE0024EEB5 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D8572145416F0024EEB5 /* NewsModel.swift */,
+				BB48D8592145420A0024EEB5 /* ItemOfNews.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		BB48D865214561DE0024EEB5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D8662145620F0024EEB5 /* NewsCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		BB48D86A21456EF40024EEB5 /* NetworkClient */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D86B21456F0E0024EEB5 /* NetworkClient.swift */,
+			);
+			path = NetworkClient;
+			sourceTree = "<group>";
+		};
+		BB48D86D214581650024EEB5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D86E214581C30024EEB5 /* DownloadNewsService.swift */,
+				BB48D870214582A10024EEB5 /* DownloadNewsServiceImp.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BB48D8722145AD060024EEB5 /* DataProvider */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataProvider;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,7 +362,6 @@
 			files = (
 				BB48D82D2141DB040024EEB5 /* LaunchScreen.storyboard in Resources */,
 				BB48D82A2141DB040024EEB5 /* Assets.xcassets in Resources */,
-				BB48D8252141DB020024EEB5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,9 +379,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB48D8582145416F0024EEB5 /* NewsModel.swift in Sources */,
+				BB48D86021454DD40024EEB5 /* Delegatable.swift in Sources */,
+				BB48D86F214581C30024EEB5 /* DownloadNewsService.swift in Sources */,
+				BB48D871214582A10024EEB5 /* DownloadNewsServiceImp.swift in Sources */,
+				BB48D853214530520024EEB5 /* BaseViewOutput.swift in Sources */,
+				BB48D86221454E8B0024EEB5 /* NewsRouter.swift in Sources */,
 				BB48D8282141DB020024EEB5 /* TinkoffNews.xcdatamodeld in Sources */,
-				BB48D8222141DB020024EEB5 /* ViewController.swift in Sources */,
+				BB48D86421454EC90024EEB5 /* NewsInteractor.swift in Sources */,
+				BB48D869214563E20024EEB5 /* NewsAssembly.swift in Sources */,
+				BB48D85A2145420A0024EEB5 /* ItemOfNews.swift in Sources */,
+				BB48D8222141DB020024EEB5 /* NewsViewController.swift in Sources */,
 				BB48D8202141DB020024EEB5 /* AppDelegate.swift in Sources */,
+				BB48D85021452E7C0024EEB5 /* NewsPresenter.swift in Sources */,
+				BB48D86C21456F0E0024EEB5 /* NetworkClient.swift in Sources */,
+				BB48D8672145620F0024EEB5 /* NewsCell.swift in Sources */,
+				BB48D85E21454D9C0024EEB5 /* Setupable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,14 +417,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BB48D8232141DB020024EEB5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BB48D8242141DB020024EEB5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BB48D82B2141DB040024EEB5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
