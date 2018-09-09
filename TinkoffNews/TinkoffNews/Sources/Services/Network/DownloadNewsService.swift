@@ -9,5 +9,5 @@
 import Foundation
 
 protocol DownloadNewsService {
-    func downloadNews(completionHandler: @escaping (ApiResult<NewsModel>) -> Void)
+    func downloadNews(startParameter: Int, endParameters: Int, completionHandler: @escaping (ApiResult<NewsModel>) -> Void)
 }

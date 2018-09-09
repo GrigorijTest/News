@@ -26,6 +26,8 @@
 		BB48D86C21456F0E0024EEB5 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D86B21456F0E0024EEB5 /* NetworkClient.swift */; };
 		BB48D86F214581C30024EEB5 /* DownloadNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D86E214581C30024EEB5 /* DownloadNewsService.swift */; };
 		BB48D871214582A10024EEB5 /* DownloadNewsServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D870214582A10024EEB5 /* DownloadNewsServiceImp.swift */; };
+		BB48D8782145D98C0024EEB5 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8772145D98C0024EEB5 /* Date.swift */; };
+		BB48D87E2145E3D70024EEB5 /* NewsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D87D2145E3D70024EEB5 /* NewsFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		BB48D86B21456F0E0024EEB5 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		BB48D86E214581C30024EEB5 /* DownloadNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadNewsService.swift; sourceTree = "<group>"; };
 		BB48D870214582A10024EEB5 /* DownloadNewsServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadNewsServiceImp.swift; sourceTree = "<group>"; };
+		BB48D8772145D98C0024EEB5 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		BB48D87D2145E3D70024EEB5 /* NewsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,7 @@
 		BB48D848214522940024EEB5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BB48D8762145D9780024EEB5 /* Extension */,
 				BB48D851214530310024EEB5 /* Protocols */,
 			);
 			path = Common;
@@ -198,6 +203,7 @@
 			children = (
 				BB48D865214561DE0024EEB5 /* Cells */,
 				BB48D8212141DB020024EEB5 /* NewsViewController.swift */,
+				BB48D87D2145E3D70024EEB5 /* NewsFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,7 +211,6 @@
 		BB48D84B214523C80024EEB5 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				BB48D8722145AD060024EEB5 /* DataProvider */,
 				BB48D84F21452E7C0024EEB5 /* NewsPresenter.swift */,
 			);
 			path = Presenter;
@@ -272,11 +277,12 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		BB48D8722145AD060024EEB5 /* DataProvider */ = {
+		BB48D8762145D9780024EEB5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BB48D8772145D98C0024EEB5 /* Date.swift */,
 			);
-			path = DataProvider;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,9 +391,11 @@
 				BB48D871214582A10024EEB5 /* DownloadNewsServiceImp.swift in Sources */,
 				BB48D853214530520024EEB5 /* BaseViewOutput.swift in Sources */,
 				BB48D86221454E8B0024EEB5 /* NewsRouter.swift in Sources */,
+				BB48D8782145D98C0024EEB5 /* Date.swift in Sources */,
 				BB48D8282141DB020024EEB5 /* TinkoffNews.xcdatamodeld in Sources */,
 				BB48D86421454EC90024EEB5 /* NewsInteractor.swift in Sources */,
 				BB48D869214563E20024EEB5 /* NewsAssembly.swift in Sources */,
+				BB48D87E2145E3D70024EEB5 /* NewsFooterView.swift in Sources */,
 				BB48D85A2145420A0024EEB5 /* ItemOfNews.swift in Sources */,
 				BB48D8222141DB020024EEB5 /* NewsViewController.swift in Sources */,
 				BB48D8202141DB020024EEB5 /* AppDelegate.swift in Sources */,

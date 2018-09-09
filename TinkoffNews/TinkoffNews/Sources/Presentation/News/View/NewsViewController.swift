@@ -10,6 +10,7 @@ import UIKit
 
 protocol NewsViewInput: AnyObject {
     func updateView(withModel model: NewsModel)
+    func showFooter() 
 }
 
 final class NewsViewController: UIViewController {
@@ -19,6 +20,7 @@ final class NewsViewController: UIViewController {
     var presenter: NewsViewOutput?
     
     private let tableView = UITableView()
+    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     private var viewModel: NewsModel? {
         didSet {
             tableView.reloadData()
@@ -31,6 +33,7 @@ final class NewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        activityIndicator.startAnimating()
         presenter?.viewIsReady()
     }
 
@@ -38,6 +41,9 @@ final class NewsViewController: UIViewController {
     // MARK: - Methods
     
     func setup() {
+        self.title = "Новости"
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9960784314, green: 0.8705882353, blue: 0.1647058824, alpha: 1)
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsCell.self, forCellReuseIdentifier: "NewsCell")
@@ -47,6 +53,13 @@ final class NewsViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.isHidden = false
     }
     
 }
@@ -70,6 +83,19 @@ extension NewsViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == (viewModel?.payload.count)! - 1 {
+            presenter?.downloadMoreNews()
+        
+            let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            spinner.startAnimating()
+            spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+            
+            self.tableView.tableFooterView = spinner
+            self.tableView.tableFooterView?.isHidden = false
+        }
+    }
+    
 }
 
 
@@ -79,6 +105,11 @@ extension NewsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return NewsCell.rowHeight
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return NewsCell.rowHeight
+    }
+    
 }
 
 
@@ -86,7 +117,20 @@ extension NewsViewController: UITableViewDelegate {
 extension NewsViewController: NewsViewInput {
     
     func updateView(withModel model: NewsModel) {
-        self.viewModel = model 
+        if self.viewModel == nil {
+            self.viewModel = model
+            activityIndicator.stopAnimating()
+        } else {
+            self.viewModel?.payload.append(contentsOf: model.payload)
+        }
+    }
+    
+    func showFooter() {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "Все новости загружены"
+        self.tableView.tableFooterView = label
+        self.tableView.tableFooterView?.isHidden = false
     }
     
 }

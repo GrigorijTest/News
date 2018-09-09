@@ -9,7 +9,7 @@
 import Foundation
 
 protocol NewsInteractorInput {
-    func downloadNews()
+    func downloadNews(startParametr: Int)
 }
 
 final class NewsInteractor {
@@ -17,7 +17,7 @@ final class NewsInteractor {
     // MARK: - Properties
     
     weak var presenter: NewsInteractorOutput?
-    
+
     let downloadService: DownloadNewsService
     
     
@@ -33,11 +33,15 @@ final class NewsInteractor {
 // MARK: - NewsInteractor
 extension NewsInteractor: NewsInteractorInput {
     
-    func downloadNews() {
-        downloadService.downloadNews() { [weak self] result in
+    func downloadNews(startParametr: Int) {
+        downloadService.downloadNews(startParameter: startParametr, endParameters: startParametr + 20) { [weak self] result in
             switch result {
             case .succes(let value):
-                self?.presenter?.newsDidObtain(model: value)
+                if value.payload.count != 0 {
+                    self?.presenter?.newsDidObtain(model: value)
+                } else {
+                    self?.presenter?.allNewsDidObtain()
+                }
             case .failure(_):
                 self?.presenter?.updateWithError()
             }

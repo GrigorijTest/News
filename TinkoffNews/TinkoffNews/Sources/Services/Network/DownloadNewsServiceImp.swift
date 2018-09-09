@@ -18,8 +18,8 @@ final class DownloadNewsServiceImp {
 // MARK: - DownloadNewsService
 extension DownloadNewsServiceImp: DownloadNewsService {
     
-    func downloadNews(completionHandler: @escaping (ApiResult<NewsModel>) -> Void) {
-        networkClient.request(endPoint: "news?first=0&last=20", completion: completionHandler)
+    func downloadNews(startParameter: Int, endParameters: Int, completionHandler: @escaping (ApiResult<NewsModel>) -> Void) {
+        networkClient.request(endPoint: "news?first=\(startParameter)&last=\(endParameters)", completion: completionHandler)
     }
     
 }

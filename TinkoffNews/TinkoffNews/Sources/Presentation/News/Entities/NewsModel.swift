@@ -10,6 +10,6 @@ import Foundation
 
 struct NewsModel: Decodable {
     
-    let payload: [ItemOfNews]
+    var payload: [ItemOfNews]
     
 }
