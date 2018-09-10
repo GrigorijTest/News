@@ -10,6 +10,7 @@ import Foundation
 
 protocol NewsInteractorInput {
     func downloadNews(startParametr: Int)
+    func updateDate()
 }
 
 final class NewsInteractor {
@@ -19,12 +20,14 @@ final class NewsInteractor {
     weak var presenter: NewsInteractorOutput?
 
     let downloadService: DownloadNewsService
+    let paginationStep: Int
     
     
     // MARK: - Init
     
-    init(downloadService: DownloadNewsService) {
+    init(downloadService: DownloadNewsService, paginationStep: Int) {
         self.downloadService = downloadService
+        self.paginationStep = paginationStep
     }
     
 }
@@ -33,18 +36,30 @@ final class NewsInteractor {
 // MARK: - NewsInteractor
 extension NewsInteractor: NewsInteractorInput {
     
-    func downloadNews(startParametr: Int) {
-        downloadService.downloadNews(startParameter: startParametr, endParameters: startParametr + 20) { [weak self] result in
+    func updateDate() {
+        downloadService.downloadNews(startParameter: 0, endParameters: 20) { [weak self] result in
+            
             switch result {
             case .succes(let value):
-                if value.payload.count != 0 {
-                    self?.presenter?.newsDidObtain(model: value)
-                } else {
-                    self?.presenter?.allNewsDidObtain()
-                }
+                self?.presenter?.newsDidObtain(model: value)
             case .failure(_):
                 self?.presenter?.updateWithError()
             }
+            
+        }
+    }
+    
+    func downloadNews(startParametr: Int) {
+        downloadService.downloadNews(startParameter: startParametr,
+                                     endParameters: startParametr + paginationStep) { [weak self] result in
+                                        
+            switch result {
+            case .succes(let value):
+                self?.presenter?.newsDidObtain(model: value)
+            case .failure(_):
+                self?.presenter?.updateWithError()
+            }
+                                        
         }
     }
     

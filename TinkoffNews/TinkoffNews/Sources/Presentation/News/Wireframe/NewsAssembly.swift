@@ -12,9 +12,10 @@ final class NewsAssembly {
     
     class func assembleModule() -> UIViewController {
         
+        let paginationStep = 20
         let view = NewsViewController()
-        let presenter = NewsPresenter()
-        let interactor = NewsInteractor(downloadService: DownloadNewsServiceImp())
+        let presenter = NewsPresenter(paginationStep: paginationStep)
+        let interactor = NewsInteractor(downloadService: DownloadNewsServiceImp(), paginationStep: paginationStep)
         let router = NewsRouter()
         
         view.presenter = presenter
@@ -22,6 +23,7 @@ final class NewsAssembly {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        router.transition = view 
         
         return view
     }

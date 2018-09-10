@@ -39,21 +39,27 @@ final class NetworkClient {
     
     init() {
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = TimeInterval(15)
+//        configuration.timeoutIntervalForRequest = TimeInterval(15)
+//        configuration.timeoutIntervalForResource = TimeInterval(15)
         self.session = URLSession(configuration: configuration)
     }
     
     
     // MARK: - Method interface
     
-    func request<T: Decodable>(endPoint: String, completion: @escaping (ApiResult<T>) -> Void) {
-        let urlString = baseURLString + endPoint
+    func request<T: Decodable>(endPoint: String, urlQuery: [String: String]? = nil, completion: @escaping (ApiResult<T>) -> Void) {
         
-        guard let apiURL = URL(string: urlString) else {
+        guard var apiURL = URLComponents(string: self.baseURLString + endPoint) else {
             fatalError("incorrect URL")
         }
         
-        let request = URLRequest(url: apiURL)
+        apiURL.queryItems = urlQuery?.compactMap { URLQueryItem(name: $0.key , value: $0.value) }
+        
+        guard let requestURL = apiURL.url else {
+            return
+        }
+        
+        let request = URLRequest(url: requestURL)
         
         task(with: request, completion: completion)
     }

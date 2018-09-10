@@ -19,7 +19,8 @@ final class DownloadNewsServiceImp {
 extension DownloadNewsServiceImp: DownloadNewsService {
     
     func downloadNews(startParameter: Int, endParameters: Int, completionHandler: @escaping (ApiResult<NewsModel>) -> Void) {
-        networkClient.request(endPoint: "news?first=\(startParameter)&last=\(endParameters)", completion: completionHandler)
+        
+        networkClient.request(endPoint: "news", urlQuery: ["first" : "\(startParameter)", "last" : "\(endParameters)"], completion: completionHandler)
     }
     
 }

@@ -10,10 +10,11 @@ import Foundation
 
 protocol NewsViewOutput: BaseViewOutput {
     func downloadMoreNews()
+    func updateDate()
+    func openDetailNewsViewController(id: String)
 }
 
 protocol NewsInteractorOutput: AnyObject {
-    func allNewsDidObtain()
     func newsDidObtain(model: NewsModel)
     func updateWithError()
 }
@@ -28,6 +29,17 @@ final class NewsPresenter {
     
     private var downloaderCounter = 0
     private var isDownloading = false
+    private let paginationStep: Int
+    
+    
+    // MARK: - Init
+    
+    init(paginationStep: Int) {
+        self.paginationStep = paginationStep
+    }
+    
+    
+    // MARK: - Private methods
     
     private func downloadNews() {
         if isDownloading {
@@ -35,14 +47,14 @@ final class NewsPresenter {
         }
         isDownloading = true
         interactor?.downloadNews(startParametr: downloaderCounter)
-        downloaderCounter += 20
+        downloaderCounter += paginationStep
     }
     
 }
 
 
 // MARK: - NewsViewOutput
-extension NewsPresenter: NewsViewOutput {
+ extension NewsPresenter: NewsViewOutput {
     
     func viewIsReady() {
         downloadNews()
@@ -50,6 +62,15 @@ extension NewsPresenter: NewsViewOutput {
     
     func downloadMoreNews() {
         downloadNews()
+    }
+    
+    func updateDate() {
+        interactor?.updateDate()
+    }
+    
+    func openDetailNewsViewController(id: String) {
+        let newsDetailViewController = NewsDetailAssembly.assemleModule(withId: id)
+        router?.showDetailViewController(newsDetailViewController)
     }
     
 }
@@ -65,11 +86,8 @@ extension NewsPresenter: NewsInteractorOutput {
     
     func updateWithError() {
         isDownloading = false
-        downloaderCounter -= 20
-    }
-    
-    func allNewsDidObtain() {
-        view?.showFooter()
+        downloaderCounter -= paginationStep
+        view?.showError()
     }
     
 }
