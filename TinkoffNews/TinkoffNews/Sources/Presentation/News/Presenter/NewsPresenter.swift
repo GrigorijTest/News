@@ -65,7 +65,8 @@ final class NewsPresenter {
     }
     
     func updateDate() {
-        interactor?.updateDate()
+        downloaderCounter = 0
+        downloadNews()
     }
     
     func openDetailNewsViewController(id: String) {

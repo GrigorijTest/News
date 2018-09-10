@@ -10,7 +10,6 @@ import Foundation
 
 protocol NewsInteractorInput {
     func downloadNews(startParametr: Int)
-    func updateDate()
 }
 
 final class NewsInteractor {
@@ -35,19 +34,6 @@ final class NewsInteractor {
 
 // MARK: - NewsInteractor
 extension NewsInteractor: NewsInteractorInput {
-    
-    func updateDate() {
-        downloadService.downloadNews(startParameter: 0, endParameters: 20) { [weak self] result in
-            
-            switch result {
-            case .succes(let value):
-                self?.presenter?.newsDidObtain(model: value)
-            case .failure(_):
-                self?.presenter?.updateWithError()
-            }
-            
-        }
-    }
     
     func downloadNews(startParametr: Int) {
         downloadService.downloadNews(startParameter: startParametr,
