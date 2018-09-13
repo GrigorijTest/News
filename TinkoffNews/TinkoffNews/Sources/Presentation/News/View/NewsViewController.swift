@@ -137,6 +137,9 @@ extension NewsViewController: UITableViewDelegate {
         
         presenter?.openDetailNewsViewController(id: model)
         tableView.deselectRow(at: indexPath, animated: true)
+        viewModel = nil
+        presenter?.updateDate()
+//        showActivityIndicator()
     }
     
 }

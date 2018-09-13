@@ -18,6 +18,7 @@ final class NewsCell: UITableViewCell {
     private let nameLabel = UILabel()
     private let subtextLabel = UILabel()
     private let dateLabel = UILabel()
+    private let counterLabel = UILabel()
     private let separator = UIView()
     private let rightOffset: CGFloat = -5
     private let leftOffset: CGFloat = 20
@@ -46,6 +47,15 @@ final class NewsCell: UITableViewCell {
         nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: NewsCell.rowHeight/4).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width*2/3).isActive = true
+        
+        counterLabel.numberOfLines = 1
+        counterLabel.textAlignment = .center
+        counterLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(counterLabel)
+        counterLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        counterLabel.leftAnchor.constraint(equalTo: nameLabel.rightAnchor).isActive = true
+        counterLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+       // counterLabel.bottomAnchor.constraint(equalTo: subtextLabel.topAnchor).isActive = true
         
         subtextLabel.numberOfLines = 2
         subtextLabel.adjustsFontSizeToFitWidth = true
@@ -99,6 +109,8 @@ extension NewsCell: Setupable {
         let dateString = formatter.string(from: date)
         
         dateLabel.text = dateString
+        
+        counterLabel.text = "\(setupModel.counter)"
     }
     
 }

@@ -19,7 +19,7 @@ final class NewsDetailViewController: BaseViewController {
     
     var presenter: BaseViewOutput?
     
-    private var textField = UITextView()
+    private var webView = UIWebView()
     
     
     // MARK: - Life cycle
@@ -37,12 +37,12 @@ final class NewsDetailViewController: BaseViewController {
     private func setup() {
         title = "Детали новости"
         navigationController?.navigationBar.tintColor = .black
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(textField)
-        textField.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        textField.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        textField.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        textField.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(webView)
+        webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         initializeIndecator()
         initializeRefreshViews()
@@ -63,7 +63,7 @@ final class NewsDetailViewController: BaseViewController {
 extension NewsDetailViewController: NewsDetailViewInput {
     
     func updateView(withModel model: NewsDetailModel) {
-        textField.text = model.content
+        webView.loadHTMLString(model.content, baseURL: nil)
         stopActivityIndecator()
     }
     

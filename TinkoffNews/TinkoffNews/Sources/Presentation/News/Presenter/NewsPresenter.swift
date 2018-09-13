@@ -72,6 +72,7 @@ final class NewsPresenter {
     func openDetailNewsViewController(id: String) {
         let newsDetailViewController = NewsDetailAssembly.assemleModule(withId: id)
         router?.showDetailViewController(newsDetailViewController)
+        interactor?.updateCounter(withId: id)
     }
     
 }
@@ -81,8 +82,9 @@ final class NewsPresenter {
 extension NewsPresenter: NewsInteractorOutput {
     
     func newsDidObtain(model: [CoreDataNews]) {
+        let sortModel = model.sorted { $0.milliseconds > $1.milliseconds }
         isDownloading = false
-        view?.updateView(withModel: model)
+        view?.updateView(withModel: sortModel)
     }
     
     func updateWithError() {

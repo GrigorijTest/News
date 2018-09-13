@@ -85,6 +85,30 @@ extension CoreDataNews {
         }
     }
     
+    @discardableResult
+    static func updateNews(in context: NSManagedObjectContext, id: String, counter: Int) -> Bool {
+        guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
+            print("Unable to get model")
+            return false
+        }
+        
+        guard let fetchRequest = CoreDataNews.fetchRequsetNews(id: id, model: model) else {
+            return false
+        }
+        
+        do {
+            if let news = try context.fetch(fetchRequest).first {
+                news.counter = Int32(counter)
+            }
+        } catch {
+            print("Failed to update News: \(error)")
+            return false
+        }
+        
+        CoreDataClient.save()
+        return true
+    }
+    
     // FETCH
     
     static func fetchRequsetNews(id: String, model: NSManagedObjectModel) -> NSFetchRequest<CoreDataNews>? {

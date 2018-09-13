@@ -11,6 +11,7 @@ import CoreData
 
 protocol NewsInteractorInput {
     func downloadNews(startParametr: Int)
+    func updateCounter(withId id: String)
 }
 
 final class NewsInteractor {
@@ -121,6 +122,32 @@ extension NewsInteractor: NewsInteractorInput {
         }
         
         presenter?.newsDidObtain(model: resultArray)
+        
+    }
+    
+    func updateCounter(withId id: String) {
+        
+        guard let context = CoreDataClient.coreDataStack?.mainContext else {
+            return
+        }
+        
+        if let model = context.persistentStoreCoordinator?.managedObjectModel {
+            do {
+                guard let newsFetch = CoreDataNews.fetchRequsetNews(id: id, model: model) else {
+                    return
+                }
+                
+                let news = try context.fetch(newsFetch)
+                guard let mynews = news.first else {
+                    return
+                }
+                mynews.counter = mynews.counter + Int32(1)
+                CoreDataNews.updateNews(in: context, id: id, counter: Int(mynews.counter))
+                
+            } catch {
+                return
+            }
+        }
         
     }
     
