@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CoreDataNews" representedClassName="CoreDataNews" syncable="YES" codeGenerationType="class">
+        <attribute name="counter" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="milliseconds" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="subtitle" attributeType="String" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+    </entity>
+    <fetchRequest name="FetchNews" entity="CoreDataNews" predicateString="id != &quot;\&quot;\&quot;&quot;"/>
+    <fetchRequest name="FetchNewsWithID" entity="CoreDataNews" predicateString="id == $id"/>
+    <elements>
+        <element name="CoreDataNews" positionX="-63" positionY="-18" width="128" height="120"/>
+    </elements>
 </model>

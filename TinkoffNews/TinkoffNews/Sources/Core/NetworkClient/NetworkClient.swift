@@ -71,11 +71,11 @@ final class NetworkClient {
         let task = session.dataTask(with: request) { (data, response, error) in
             let result: ApiResult<T>
             
-            defer {
-                DispatchQueue.main.async {
-                    completion(result)
-                }
-            }
+          //  defer {
+               // DispatchQueue.main.async {
+            
+             //   }
+         //   }
             
             guard let HTTPResponse = response as? HTTPURLResponse else {
                 result = .failure(ErrorDescription.connectionError)
@@ -98,6 +98,7 @@ final class NetworkClient {
                 result = .failure(ErrorDescription.error(message: error?.localizedDescription))
             }
             
+             completion(result)
         }
         task.resume()
     }

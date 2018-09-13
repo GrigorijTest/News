@@ -15,7 +15,7 @@ protocol NewsViewOutput: BaseViewOutput {
 }
 
 protocol NewsInteractorOutput: AnyObject {
-    func newsDidObtain(model: NewsModel)
+    func newsDidObtain(model: [CoreDataNews])
     func updateWithError()
 }
 
@@ -80,7 +80,7 @@ final class NewsPresenter {
 // MARK: - NewsInteractorOutput
 extension NewsPresenter: NewsInteractorOutput {
     
-    func newsDidObtain(model: NewsModel) {
+    func newsDidObtain(model: [CoreDataNews]) {
         isDownloading = false
         view?.updateView(withModel: model)
     }

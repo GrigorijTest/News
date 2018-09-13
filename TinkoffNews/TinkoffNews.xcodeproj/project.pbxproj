@@ -37,6 +37,8 @@
 		BB48D89B21470E9D0024EEB5 /* DownloadNewsDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D89A21470E9D0024EEB5 /* DownloadNewsDetailService.swift */; };
 		BB48D89D21470EAD0024EEB5 /* DownloadNewsDetailServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D89C21470EAD0024EEB5 /* DownloadNewsDetailServiceImp.swift */; };
 		BB48D89F21470EED0024EEB5 /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D89E21470EED0024EEB5 /* NewsDetailModel.swift */; };
+		BB48D8C3214858CC0024EEB5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8C2214858CC0024EEB5 /* CoreDataStack.swift */; };
+		BB48D8C521486B1D0024EEB5 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB48D8C421486B1D0024EEB5 /* CoreDataClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		BB48D89A21470E9D0024EEB5 /* DownloadNewsDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadNewsDetailService.swift; sourceTree = "<group>"; };
 		BB48D89C21470EAD0024EEB5 /* DownloadNewsDetailServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadNewsDetailServiceImp.swift; sourceTree = "<group>"; };
 		BB48D89E21470EED0024EEB5 /* NewsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
+		BB48D8C2214858CC0024EEB5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		BB48D8C421486B1D0024EEB5 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +195,7 @@
 		BB48D847214522830024EEB5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BB48D8C1214858A40024EEB5 /* CoreData */,
 				BB48D86A21456EF40024EEB5 /* NetworkClient */,
 			);
 			path = Core;
@@ -222,7 +227,7 @@
 		BB48D84A214523BD0024EEB5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BB48D865214561DE0024EEB5 /* Cells */,
+				BB48D8662145620F0024EEB5 /* NewsCell.swift */,
 				BB48D8212141DB020024EEB5 /* NewsViewController.swift */,
 				BB48D87D2145E3D70024EEB5 /* NewsFooterView.swift */,
 			);
@@ -271,14 +276,6 @@
 				BB48D8592145420A0024EEB5 /* ItemOfNews.swift */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		BB48D865214561DE0024EEB5 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				BB48D8662145620F0024EEB5 /* NewsCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		BB48D86A21456EF40024EEB5 /* NetworkClient */ = {
@@ -392,6 +389,15 @@
 			path = DownloadNewsDetail;
 			sourceTree = "<group>";
 		};
+		BB48D8C1214858A40024EEB5 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BB48D8C2214858CC0024EEB5 /* CoreDataStack.swift */,
+				BB48D8C421486B1D0024EEB5 /* CoreDataClient.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -499,6 +505,7 @@
 				BB48D89D21470EAD0024EEB5 /* DownloadNewsDetailServiceImp.swift in Sources */,
 				BB48D86F214581C30024EEB5 /* DownloadNewsService.swift in Sources */,
 				BB48D871214582A10024EEB5 /* DownloadNewsServiceImp.swift in Sources */,
+				BB48D8C3214858CC0024EEB5 /* CoreDataStack.swift in Sources */,
 				BB48D89B21470E9D0024EEB5 /* DownloadNewsDetailService.swift in Sources */,
 				BB48D853214530520024EEB5 /* BaseViewOutput.swift in Sources */,
 				BB48D893214702A70024EEB5 /* NewsDetailViewController.swift in Sources */,
@@ -509,6 +516,7 @@
 				BB48D8282141DB020024EEB5 /* TinkoffNews.xcdatamodeld in Sources */,
 				BB48D8812146A5230024EEB5 /* Helper.swift in Sources */,
 				BB48D86421454EC90024EEB5 /* NewsInteractor.swift in Sources */,
+				BB48D8C521486B1D0024EEB5 /* CoreDataClient.swift in Sources */,
 				BB48D869214563E20024EEB5 /* NewsAssembly.swift in Sources */,
 				BB48D87E2145E3D70024EEB5 /* NewsFooterView.swift in Sources */,
 				BB48D85A2145420A0024EEB5 /* ItemOfNews.swift in Sources */,

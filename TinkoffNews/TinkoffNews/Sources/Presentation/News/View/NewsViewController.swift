@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NewsViewInput: AnyObject {
-    func updateView(withModel model: NewsModel)
+    func updateView(withModel model: [CoreDataNews])
     func showError()
 }
 
@@ -23,7 +23,7 @@ final class NewsViewController: BaseViewController {
     private let tableViewRefreshControl = UIRefreshControl()
     private let footer = NewsFooterView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 120))
     
-    private var viewModel: NewsModel? {
+    private var viewModel: [CoreDataNews]? = [] {
         didSet {
             tableView.reloadData()
         }
@@ -88,11 +88,11 @@ final class NewsViewController: BaseViewController {
 extension NewsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.payload.count ?? 0
+        return viewModel?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel?.payload[indexPath.row] else {
+        guard let model = viewModel?[indexPath.row] else {
             return UITableViewCell()
         }
         
@@ -103,7 +103,7 @@ extension NewsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let viewModelCount = viewModel?.payload.count else {
+        guard let viewModelCount = viewModel?.count else {
             return
         }
         
@@ -131,7 +131,7 @@ extension NewsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let model = viewModel?.payload[indexPath.row].id else {
+        guard let model = viewModel?[indexPath.row].id else {
             return
         }
         
@@ -145,13 +145,13 @@ extension NewsViewController: UITableViewDelegate {
 // MARK: - NewsViewInput
 extension NewsViewController: NewsViewInput {
     
-    func updateView(withModel model: NewsModel) {
+    func updateView(withModel model: [CoreDataNews]) {
         stopActivityIndecator()
         footer.stopDownload()
         if self.viewModel == nil {
             self.viewModel = model
         } else {
-            self.viewModel?.payload.append(contentsOf: model.payload)
+            self.viewModel?.append(contentsOf: model)
         }
     }
     

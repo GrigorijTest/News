@@ -36,11 +36,13 @@ extension NewsDetailInteractor: NewsDetailInteractorInput {
     
     func downloadDetailInfo() {
         downloadService.downloadNews(withId: id) { [weak self] result in
-            switch result {
-            case .succes(let value):
-                self?.presenter?.newsDetailDidObtain(model: value)
-            case .failure(_):
-                self?.presenter?.updateWithError()
+            DispatchQueue.main.async {
+                switch result {
+                case .succes(let value):
+                    self?.presenter?.newsDetailDidObtain(model: value)
+                case .failure(_):
+                    self?.presenter?.updateWithError()
+                }
             }
         }
     }
