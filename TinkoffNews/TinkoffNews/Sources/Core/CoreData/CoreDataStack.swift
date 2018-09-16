@@ -11,8 +11,6 @@ import CoreData
 
 final class CoreDataStack {
     
-    //static let sharedInstance: CoreDataStack = CoreDataStack()
-    
     private var storeURL: URL {
         let documentsDirURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let url = documentsDirURL.appendingPathComponent("Store.sqlite")

@@ -13,6 +13,7 @@ class BaseViewController: UIViewController {
     // MARK: - Properties
     
     var refreshButton: UIButton?
+    
     private var refreshLabel: UILabel?
     private var activityIndicator: UIActivityIndicatorView?
     
@@ -79,6 +80,5 @@ class BaseViewController: UIViewController {
         refreshButton?.isHidden = false
         refreshLabel?.isHidden = false
     }
-    
     
 }

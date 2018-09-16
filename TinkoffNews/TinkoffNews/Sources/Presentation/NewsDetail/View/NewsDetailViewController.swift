@@ -49,6 +49,7 @@ final class NewsDetailViewController: BaseViewController {
         refreshButton?.addTarget(self, action: #selector(download), for: .touchUpInside)
     }
     
+    
     // MARK: - Action
     
     @objc private func download() {

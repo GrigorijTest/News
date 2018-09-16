@@ -24,12 +24,13 @@ final class NewsInteractor {
     let paginationStep: Int
     let storage: StorageClient
     
+    
     // MARK: - Init
     
-    init(downloadService: DownloadNewsService, paginationStep: Int) {
+    init(downloadService: DownloadNewsService, paginationStep: Int, storage: StorageClient) {
         self.downloadService = downloadService
         self.paginationStep = paginationStep
-        self.storage = Storage(coreDataStack: CoreDataStack())
+        self.storage = storage
     }
     
     
@@ -104,6 +105,7 @@ extension NewsInteractor: NewsInteractorInput {
             }
             return
         }
+        
         let startIndex = startParametr
         let endIndex = startParametr + paginationStep - 1
         

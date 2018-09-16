@@ -13,9 +13,11 @@ final class NewsAssembly {
     class func assembleModule() -> UIViewController {
         
         let paginationStep = 20
+        let storage = Storage(coreDataStack: CoreDataStack())
+        
         let view = NewsViewController()
         let presenter = NewsPresenter(paginationStep: paginationStep)
-        let interactor = NewsInteractor(downloadService: DownloadNewsServiceImp(), paginationStep: paginationStep)
+        let interactor = NewsInteractor(downloadService: DownloadNewsServiceImp(), paginationStep: paginationStep, storage: storage)
         let router = NewsRouter()
         
         view.presenter = presenter

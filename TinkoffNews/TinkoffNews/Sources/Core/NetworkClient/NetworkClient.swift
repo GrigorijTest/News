@@ -39,8 +39,8 @@ final class NetworkClient {
     
     init() {
         let configuration = URLSessionConfiguration.default
-//        configuration.timeoutIntervalForRequest = TimeInterval(15)
-//        configuration.timeoutIntervalForResource = TimeInterval(15)
+        configuration.timeoutIntervalForRequest = TimeInterval(15)
+        configuration.timeoutIntervalForResource = TimeInterval(15)
         self.session = URLSession(configuration: configuration)
     }
     
@@ -71,12 +71,6 @@ final class NetworkClient {
         let task = session.dataTask(with: request) { (data, response, error) in
             let result: ApiResult<T>
             
-          //  defer {
-               // DispatchQueue.main.async {
-            
-             //   }
-         //   }
-            
             guard let HTTPResponse = response as? HTTPURLResponse else {
                 result = .failure(ErrorDescription.connectionError)
                 return
@@ -102,4 +96,5 @@ final class NetworkClient {
         }
         task.resume()
     }
+    
 }
