@@ -16,6 +16,7 @@ struct ItemOfNews: Decodable {
     let name: String
     let text: String
     let milliseconds: Int
+    var counter: Int32 = 0
     
     enum CodingKeys: String, CodingKey {
         case bankInfoTypeId
@@ -27,6 +28,15 @@ struct ItemOfNews: Decodable {
     
     enum DateKeys: String, CodingKey {
         case milliseconds
+    }
+    
+    init(bankInfoTypeId: Int, id: String, name: String, text: String, milliseconds: Int, counter: Int32) {
+        self.bankInfoTypeId = bankInfoTypeId
+        self.id = id
+        self.name = name
+        self.text = text
+        self.milliseconds = milliseconds
+        self.counter = counter
     }
     
     init(from decoder: Decoder) throws {
@@ -60,14 +70,15 @@ extension CoreDataNews {
         do {
             if let obtainNews = try context.fetch(fetchRequest).first {
                 news = obtainNews
+                print("find")
             } else {
                 news = insertItemNews(id: id, date: date, title: title, subtitle: subtitle, counter: counter, context: context)
+                print("save")
             }
         } catch {
             return nil
         }
         
-        CoreDataClient.save()
         return news
     }
     
@@ -85,28 +96,28 @@ extension CoreDataNews {
         }
     }
     
-    @discardableResult
-    static func updateNews(in context: NSManagedObjectContext, id: String, counter: Int) -> Bool {
+    static func findNews(id: String, context: NSManagedObjectContext) -> CoreDataNews? {
         guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
-            print("Unable to get model")
-            return false
+            print("problem with context")
+            return nil
         }
         
-        guard let fetchRequest = CoreDataNews.fetchRequsetNews(id: id, model: model) else {
-            return false
+        var news: CoreDataNews?
+        
+        guard let request =  CoreDataNews.fetchRequsetNews(id: id, model: model) else {
+            return nil
         }
         
         do {
-            if let news = try context.fetch(fetchRequest).first {
-                news.counter = Int32(counter)
+            let results = try context.fetch(request)
+            if let resultNews = results.first {
+                news = resultNews
             }
         } catch {
-            print("Failed to update News: \(error)")
-            return false
+            print("Error is \(error)")
         }
         
-        CoreDataClient.save()
-        return true
+        return news
     }
     
     // FETCH

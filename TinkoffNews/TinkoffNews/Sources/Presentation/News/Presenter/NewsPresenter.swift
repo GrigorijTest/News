@@ -10,12 +10,13 @@ import Foundation
 
 protocol NewsViewOutput: BaseViewOutput {
     func downloadMoreNews()
-    func updateDate()
-    func openDetailNewsViewController(id: String)
+    func updateData()
+    func openDetailNewsViewController(id: String, indexPath: IndexPath)
 }
 
 protocol NewsInteractorOutput: AnyObject {
-    func newsDidObtain(model: [CoreDataNews])
+    func newsDidObtain(model: [ItemOfNews])
+    func didObtainNews(_ news: ItemOfNews, indexPath: IndexPath)
     func updateWithError()
 }
 
@@ -64,15 +65,15 @@ final class NewsPresenter {
         downloadNews()
     }
     
-    func updateDate() {
+    func updateData() {
         downloaderCounter = 0
         downloadNews()
     }
     
-    func openDetailNewsViewController(id: String) {
+    func openDetailNewsViewController(id: String, indexPath: IndexPath) {
         let newsDetailViewController = NewsDetailAssembly.assemleModule(withId: id)
         router?.showDetailViewController(newsDetailViewController)
-        interactor?.updateCounter(withId: id)
+        interactor?.updateCounter(withId: id, andIndexpath: indexPath)
     }
     
 }
@@ -81,7 +82,7 @@ final class NewsPresenter {
 // MARK: - NewsInteractorOutput
 extension NewsPresenter: NewsInteractorOutput {
     
-    func newsDidObtain(model: [CoreDataNews]) {
+    func newsDidObtain(model: [ItemOfNews]) {
         let sortModel = model.sorted { $0.milliseconds > $1.milliseconds }
         isDownloading = false
         view?.updateView(withModel: sortModel)
@@ -93,4 +94,7 @@ extension NewsPresenter: NewsInteractorOutput {
         view?.showError()
     }
     
+    func didObtainNews(_ news: ItemOfNews, indexPath: IndexPath) {
+        view?.updateCell(withNews: news, andIndexPath: indexPath)
+    }
 }

@@ -9,7 +9,8 @@
 import UIKit
 
 protocol NewsViewInput: AnyObject {
-    func updateView(withModel model: [CoreDataNews])
+    func updateView(withModel model: [ItemOfNews])
+    func updateCell(withNews news: ItemOfNews, andIndexPath indexPath: IndexPath)
     func showError()
 }
 
@@ -23,7 +24,7 @@ final class NewsViewController: BaseViewController {
     private let tableViewRefreshControl = UIRefreshControl()
     private let footer = NewsFooterView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 120))
     
-    private var viewModel: [CoreDataNews]? = [] {
+    private var viewModel: [ItemOfNews]? = [] {
         didSet {
             tableView.reloadData()
         }
@@ -71,13 +72,13 @@ final class NewsViewController: BaseViewController {
     
     @objc private func download() {
         viewModel = nil
-        presenter?.updateDate()
+        presenter?.updateData()
         showActivityIndicator()
     }
     
     @objc private func handleRefresh() {
         viewModel = nil
-        presenter?.updateDate()
+        presenter?.updateData()
         tableViewRefreshControl.endRefreshing()
     }
     
@@ -108,8 +109,8 @@ extension NewsViewController: UITableViewDataSource {
         }
         
         if indexPath.row == viewModelCount - 1 {
-            presenter?.downloadMoreNews()
             footer.startDownload()
+            presenter?.downloadMoreNews()
         }
     }
     
@@ -135,11 +136,8 @@ extension NewsViewController: UITableViewDelegate {
             return
         }
         
-        presenter?.openDetailNewsViewController(id: model)
+        presenter?.openDetailNewsViewController(id: model, indexPath: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        viewModel = nil
-        presenter?.updateDate()
-//        showActivityIndicator()
     }
     
 }
@@ -148,14 +146,14 @@ extension NewsViewController: UITableViewDelegate {
 // MARK: - NewsViewInput
 extension NewsViewController: NewsViewInput {
     
-    func updateView(withModel model: [CoreDataNews]) {
-        stopActivityIndecator()
-        footer.stopDownload()
+    func updateView(withModel model: [ItemOfNews]) {
         if self.viewModel == nil {
             self.viewModel = model
         } else {
             self.viewModel?.append(contentsOf: model)
         }
+        stopActivityIndecator()
+        footer.stopDownload()
     }
     
     func showError() {
@@ -167,5 +165,13 @@ extension NewsViewController: NewsViewInput {
             showErrorScreen()
         }
     }
+    
+    func updateCell(withNews news: ItemOfNews, andIndexPath indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        viewModel?[indexPath.row] = news
+        (cell as? Setupable)?.setup(news)
+        tableView.reloadRows(at: [indexPath], with: .middle)
+    }
+    
     
 }

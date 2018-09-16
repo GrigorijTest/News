@@ -95,12 +95,12 @@ final class NewsCell: UITableViewCell {
 extension NewsCell: Setupable {
     
     func setup(_ object: Any) {
-        guard let setupModel = object as? CoreDataNews else {
+        guard let setupModel = object as? ItemOfNews else {
             return
         }
         
-        nameLabel.text = setupModel.title
-        subtextLabel.text = setupModel.subtitle
+        nameLabel.text = setupModel.name
+        subtextLabel.text = setupModel.text
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"

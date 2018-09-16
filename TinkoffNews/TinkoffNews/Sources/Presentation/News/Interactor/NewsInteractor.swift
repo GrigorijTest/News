@@ -11,7 +11,7 @@ import CoreData
 
 protocol NewsInteractorInput {
     func downloadNews(startParametr: Int)
-    func updateCounter(withId id: String)
+    func updateCounter(withId id: String, andIndexpath indexPath: IndexPath)
 }
 
 final class NewsInteractor {
@@ -22,12 +22,14 @@ final class NewsInteractor {
 
     let downloadService: DownloadNewsService
     let paginationStep: Int
+    let storage: StorageClient
     
     // MARK: - Init
     
     init(downloadService: DownloadNewsService, paginationStep: Int) {
         self.downloadService = downloadService
         self.paginationStep = paginationStep
+        self.storage = Storage(coreDataStack: CoreDataStack())
     }
     
     
@@ -58,24 +60,15 @@ final class NewsInteractor {
         
     }
     
-    private func downloadNews(page: Int, completionHandler: @escaping (ApiResult<[CoreDataNews?]>) -> Void)  {
+    private func downloadNews(page: Int, completionHandler: @escaping (ApiResult<[ItemOfNews]>) -> Void)  {
         
-        guard let savedContext = CoreDataClient.coreDataStack?.saveContext else {
-            return
-        }
- 
-        
-        downloadService.downloadNews(startParameter: page, endParameters: page + paginationStep) { result in
+        downloadService.downloadNews(startParameter: page, endParameters: page + paginationStep) { [weak self] result in
             
             switch result {
             case .succes(let value):
-                var resultNetworkArray: [CoreDataNews?] = []
-                    
-                for element in value.payload {
-                    resultNetworkArray.append(CoreDataNews.findOrInsertNews(id: element.id, date: Int64(element.milliseconds), title: element.name, subtitle: element.text, counter: 0, context: savedContext))
-                }
+                self?.storage.save(elements: value.payload)
                 
-                completionHandler(.succes(resultNetworkArray))
+                completionHandler(.succes(value.payload))
                
             case .failure(_):
                  completionHandler(.failure(.connectionError))
@@ -101,10 +94,9 @@ extension NewsInteractor: NewsInteractorInput {
             downloadNews(page: startParametr) { [weak self] result in
                 
                 switch result {
-                case .succes(var value):
-                    value = value.compactMap { $0 }
+                case .succes(let  value):
                     DispatchQueue.main.async {
-                    self?.presenter?.newsDidObtain(model: value as! [CoreDataNews])
+                    self?.presenter?.newsDidObtain(model: value)
                     }
                 case .failure(_): self?.presenter?.updateWithError()
                 }
@@ -115,40 +107,36 @@ extension NewsInteractor: NewsInteractorInput {
         let startIndex = startParametr
         let endIndex = startParametr + paginationStep - 1
         
-        var resultArray = [CoreDataNews]()
+        var resultArray = [ItemOfNews]()
         
         for index in startIndex..<endIndex {
-            resultArray.append(cashArray[index])
+            let cashItem = cashArray[index]
+            guard let id = cashItem.id,
+                  let title = cashItem.title,
+                  let text = cashItem.subtitle else {
+                    continue
+                  }
+            
+            let newsItem = ItemOfNews(bankInfoTypeId: 1, id: id, name: title, text: text, milliseconds: Int(cashItem.milliseconds), counter: cashItem.counter)
+            resultArray.append(newsItem)
         }
         
         presenter?.newsDidObtain(model: resultArray)
         
     }
     
-    func updateCounter(withId id: String) {
-        
-        guard let context = CoreDataClient.coreDataStack?.mainContext else {
-            return
-        }
-        
-        if let model = context.persistentStoreCoordinator?.managedObjectModel {
-            do {
-                guard let newsFetch = CoreDataNews.fetchRequsetNews(id: id, model: model) else {
-                    return
-                }
-                
-                let news = try context.fetch(newsFetch)
-                guard let mynews = news.first else {
-                    return
-                }
-                mynews.counter = mynews.counter + Int32(1)
-                CoreDataNews.updateNews(in: context, id: id, counter: Int(mynews.counter))
-                
-            } catch {
+    func updateCounter(withId id: String, andIndexpath indexPath: IndexPath) {
+        storage.increaseCount(id: id)
+        let updateNews = storage.getNews(id: id)
+        guard let id = updateNews?.id,
+              let name = updateNews?.title,
+              let text = updateNews?.subtitle,
+              let counter = updateNews?.counter else {
                 return
-            }
         }
         
+        let news = ItemOfNews(bankInfoTypeId: 1, id: id, name: name, text: text, milliseconds: Int(updateNews?.milliseconds ?? 0), counter: counter)
+        presenter?.didObtainNews(news, indexPath: indexPath)
     }
     
 }
